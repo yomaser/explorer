@@ -1,21 +1,26 @@
 #include <Arduino.h>
-
-#define LENGTH 100
-#define OFFSET 0
+#include <Wire.h>
+#include "ads111x.hpp"
+#include "config.hpp"
+#include "filter.hpp"
 
 void setup() {
-    pinMode(A0, INPUT);
     Serial.begin(115200);
+    adcInit();
 }
 
-struct Geophone {
-    uint32_t Vertical[LENGTH];
-} geophone;
-
 void loop() {
-    for (uint8_t i = 0; i < LENGTH; i++) {
-        geophone.Vertical[i] = analogRead(A0) - OFFSET;
-        delayMicroseconds(1000);
+    Geophone geophone;
+
+    for (uint8_t i = 0; i < FRAME_LENGTH; i++) {
+#if FILTER_ENABLE == 1
+        filterValue(&geophone, i);
+#else
+        geophone.Vertical[i] = adcRead();
+        if (SAMPLE_INTERVAL > 0) {
+            delayMicroseconds(SAMPLE_INTERVAL);
+        }
+#endif
     }
 
     Serial.write((uint8_t*)&geophone, sizeof(geophone));
