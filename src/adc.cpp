@@ -1,4 +1,4 @@
-#include <ads111x.hpp>
+#include "adc.hpp"
 
 void adcInit() {
     Wire.begin();
