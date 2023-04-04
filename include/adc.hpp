@@ -3,5 +3,12 @@
 #include <Wire.h>
 #include "config.hpp"
 
-void adcInit();
-int32_t adcRead();
+class ADS1115 {
+   private:
+    uint8_t address;
+
+   public:
+    ADS1115(uint8_t address);
+    void begin();
+    int32_t getVoltage();
+};
