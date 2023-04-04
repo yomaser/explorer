@@ -1,6 +1,6 @@
 #include "gnss.hpp"
 
-GNSS::GNSS(uint_least8_t rxPin, uint_least8_t txPin, uint_least16_t baudRate) {
+GNSS::GNSS(uint8_t rxPin, uint8_t txPin, uint16_t baudRate) {
     this->Serial = new SoftwareSerial(rxPin, txPin);
 }
 
