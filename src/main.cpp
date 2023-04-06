@@ -34,7 +34,7 @@ void filterValue(Geophone* phone, uint8_t index) {
 #endif
 
 void setup() {
-    Serial.begin(115200);
+    Serial.begin(19200);
     ads1115.begin();
     gnss.begin();
 }
