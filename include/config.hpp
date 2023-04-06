@@ -3,7 +3,7 @@
 #include <stdint.h>
 
 // 滤波器使能
-#define FILTER_ENABLE 0
+#define FILTER_ENABLE 1
 // GNSS 模块 TX 管脚
 #define GNSS_TX 2
 // GNSS 模块 RX 管脚
