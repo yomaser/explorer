@@ -21,7 +21,7 @@
 // 采样间隔
 #define SAMPLE_INTERVAL 0
 // 采样窗口大小
-#define WINDOW_SIZE 5
+#define WINDOW_SIZE 10
 
 // 检波器电压值
 struct Geophone {
