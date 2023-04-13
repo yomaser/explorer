@@ -1,14 +1,14 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "adc.hpp"
+#include "ADS1X15.h"
 #include "config.hpp"
 #include "gnss.hpp"
 
 uint8_t isRequest(uint8_t* array, size_t length);
 
 GNSS gnss(GNSS_TX, GNSS_RX, GNSS_BAUD);
-ADS1115 ads1115(ADC_ADDRESS);
+ADS1115 ads(ADC_ADDRESS);
 
 Geophone geophone = {
     .Latitude = -1.0,
@@ -18,8 +18,8 @@ Geophone geophone = {
 
 void setup() {
     Serial.begin(19200);
-    ads1115.begin();
     gnss.begin();
+    ads.begin();
 }
 
 void loop() {
@@ -28,13 +28,15 @@ void loop() {
     }
 
     if (isRequest((uint8_t*)FRAME_REQUEST, sizeof(FRAME_REQUEST))) {
-        geophone.Vertical = ads1115.readADC(FS_1_024V, CHANNEL_AIN0);
-        geophone.EastWest = ads1115.readADC(FS_1_024V, CHANNEL_AIN1);
-        geophone.NorthSouth = ads1115.readADC(FS_1_024V, CHANNEL_AIN2);
+        ads.setGain(ADC_PRECISION);
+        float f = ads.toVoltage(1);
+
+        geophone.Vertical = (float)ads.readADC(0) * f;
+        geophone.EastWest = (float)ads.readADC(1) * f;
+        geophone.NorthSouth = (float)ads.readADC(2) * f;
 
         Serial.write(FRAME_HEADER, sizeof(FRAME_HEADER));
         Serial.write((uint8_t*)&geophone, sizeof(geophone));
-        Serial.write(FRAME_TAIL, sizeof(FRAME_TAIL));
     }
 }
 
