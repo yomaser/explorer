@@ -15,7 +15,7 @@
 // ADS1115 I2C 地址
 #define ADC_ADDRESS 0x48
 // ADS1115 测量精度
-#define ADC_PRECISION 2
+#define ADC_PRECISION 16
 
 // 数据帧索取字节
 const uint8_t FRAME_REQUEST[] = {0x55, 0x55};
