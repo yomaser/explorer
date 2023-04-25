@@ -1,6 +1,11 @@
 #pragma once
 
+#ifdef ESP32
+#include <EspSoftwareSerial.h>
+#else
 #include <SoftwareSerial.h>
+#endif
+
 #include <stdint.h>
 #include "config.hpp"
 
