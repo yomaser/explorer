@@ -7,7 +7,7 @@
 
 uint8_t isRequest(uint8_t* array, size_t length);
 
-GNSS gnss(GNSS_TX, GNSS_RX, GNSS_BAUD);
+// GNSS gnss(GNSS_TX, GNSS_RX, GNSS_BAUD);
 ADS1115 ads(ADC_ADDRESS);
 
 Geophone geophone = {
@@ -18,14 +18,14 @@ Geophone geophone = {
 
 void setup() {
     Serial.begin(19200);
-    gnss.begin();
+    // gnss.begin();
     ads.begin();
 }
 
 void loop() {
-    if (millis() % 600000 == 0) {
-        gnss.getCoordination(&geophone);
-    }
+    // if (millis() % 600000 == 0) {
+    //     gnss.getCoordination(&geophone);
+    // }
 
     if (isRequest((uint8_t*)FRAME_REQUEST, sizeof(FRAME_REQUEST))) {
         ads.setGain(ADC_PRECISION);
