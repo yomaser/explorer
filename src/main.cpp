@@ -37,6 +37,8 @@ void loop() {
 
         Serial.write(FRAME_HEADER, sizeof(FRAME_HEADER));
         Serial.write((uint8_t*)&geophone, sizeof(geophone));
+    } else {
+        Serial.write(FRAME_FILL, sizeof(FRAME_FILL));
     }
 }
 
