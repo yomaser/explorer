@@ -36,18 +36,25 @@ void loop() {
         geophone.NorthSouth = (float)ads.readADC(2) * f;
 
         Serial.write(FRAME_HEADER, sizeof(FRAME_HEADER));
+        delayMicroseconds(500);
         Serial.write((uint8_t*)&geophone, sizeof(geophone));
+        delayMicroseconds(500);
     } else {
-        Serial.write(FRAME_FILL, sizeof(FRAME_FILL));
+        Serial.write(0x56);
+        delayMicroseconds(500);
     }
+
+    Serial.flush();
 }
 
 uint8_t isRequest(uint8_t* array, size_t length) {
     size_t count = 0;
+    uint32_t start = millis();
 
-    while (count < length) {
+    while (millis() - start < TIMEOUT_MS && count < length) {
         if (Serial.available()) {
-            uint8_t byte = Serial.read();
+            uint8_t byte;
+            Serial.readBytes(&byte, 1);
 
             if (byte == array[count]) {
                 count++;
