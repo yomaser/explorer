@@ -8,10 +8,6 @@
 #define GNSS_RX 3
 // GNSS 模块波特率
 #define GNSS_BAUD 9600
-// 采样间隔
-#define SAMPLE_INTERVAL 0
-// 采样窗口大小
-#define WINDOW_SIZE 10
 // ADS1115 I2C 地址
 #define ADC_ADDRESS 0x48
 // ADS1115 测量精度
