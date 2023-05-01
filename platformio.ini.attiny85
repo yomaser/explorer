@@ -1,0 +1,5 @@
+[env:attiny85]
+platform = atmelavr
+board = digispark-tiny
+framework = arduino
+build_flags = -w
