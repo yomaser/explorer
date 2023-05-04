@@ -8,7 +8,7 @@
 #include "pt.h"
 
 ADS1115 ads(ADC_ADDRESS);
-SensorData sensorData[SAMPLE_RATE];
+SensorData sensorData;
 
 static struct pt ThreadSerialListener;
 static struct pt ThreadGeophoneReader;
@@ -78,11 +78,10 @@ static int GeophoneReader(struct pt* pt) {
         for (uint8_t i = 0; i < SAMPLE_RATE; i++) {
             ads.setGain(ADC_PRECISION);
             float f = ads.toVoltage(1);
-            sensorData[i] = {
-                .Vertical = (float)ads.readADC(0) * f,
-                .EastWest = (float)ads.readADC(1) * f,
-                .NorthSouth = (float)ads.readADC(2) * f,
-            };
+
+            sensorData.Vertical[i] = (float)ads.readADC(0) * f;
+            sensorData.EastWest[i] = (float)ads.readADC(1) * f;
+            sensorData.NorthSouth[i] = (float)ads.readADC(2) * f;
 
             PT_TIMER_DELAY(pt, getDelay(SAMPLE_RATE));
             PT_YIELD(pt);

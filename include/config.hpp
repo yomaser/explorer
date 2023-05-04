@@ -11,7 +11,7 @@
 // 请求字节等待超时
 #define TIMEOUT_MS 100
 // 采样率（单位 Sps）
-#define SAMPLE_RATE 20
+#define SAMPLE_RATE 100
 
 // 数据帧填充字节
 const uint8_t FRAME_PADDING = 0x56;
@@ -22,7 +22,7 @@ const uint8_t FRAME_HEADER[] = {0x55, 0xAA};
 
 // 检波器数据帧
 struct SensorData {
-    float Vertical;
-    float EastWest;
-    float NorthSouth;
+    float Vertical[SAMPLE_RATE];
+    float EastWest[SAMPLE_RATE];
+    float NorthSouth[SAMPLE_RATE];
 };
