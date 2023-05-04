@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.js": "javascriptreact",
+        "*.tcc": "cpp",
+        "ostream": "cpp",
+        "string_view": "cpp",
+        "array": "cpp",
+        "string": "cpp"
+    }
+}
