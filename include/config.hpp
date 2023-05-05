@@ -10,13 +10,8 @@
 #define SAMPLE_RATE 35
 // ADS1115 测量精度（0 为最大增益）
 #define ADC_PRECISION 0
-
-// 数据帧请求字
-const uint8_t FRAME_REQUEST = 0x55;
 // 数据帧起始字节
 const uint8_t FRAME_HEADER[] = {0xAA, 0x55};
-// 数据帧填充字节
-const uint8_t FRAME_PADDING[] = {0x40, 0x40, 0x40};
 
 // 检波器数据帧
 struct SensorData {
