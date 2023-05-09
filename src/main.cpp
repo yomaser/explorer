@@ -9,6 +9,8 @@ SensorData sensorData;
 void setup() {
     Serial.begin(SERIAL_BAUD);
     ads.begin();
+    ads.setWireClock(400000);
+    ads.setDataRate(7);
 }
 
 void loop() {

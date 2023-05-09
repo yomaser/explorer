@@ -7,7 +7,7 @@
 // ADS1115 I2C 地址
 #define ADC_ADDRESS 0x48
 // 采样率（单位 Sps）
-#define SAMPLE_RATE 35
+#define SAMPLE_RATE 100
 // ADS1115 测量精度（0 为最大增益）
 #define ADC_PRECISION 0
 // 数据帧起始字节
