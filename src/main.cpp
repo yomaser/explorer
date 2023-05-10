@@ -24,7 +24,7 @@ void loop() {
     }
 
     Serial.write(FRAME_HEADER, sizeof(FRAME_HEADER));
-    delayMicroseconds(1000);
+    delayMicroseconds(500);
     Serial.write((uint8_t*)&sensorData, sizeof(sensorData));
     Serial.flush();
 }
