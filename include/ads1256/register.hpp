@@ -1,0 +1,17 @@
+#pragma once
+
+#include <stdint.h>
+
+enum ADC_REGISTERS {
+    REGISTER_STATUS = 0x00,
+    REGISTER_MUX = 0x01,
+    REGISTER_ADCON = 0x02,
+    REGISTER_DRATE = 0x03,
+    REGISTER_IO = 0x04,
+    REGISTER_OFC0 = 0x05,
+    REGISTER_OFC1 = 0x06,
+    REGISTER_OFC2 = 0x07,
+    REGISTER_FSC0 = 0x08,
+    REGISTER_FSC1 = 0x09,
+    REGISTER_FSC2 = 0x0A,
+};
