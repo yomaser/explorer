@@ -7,7 +7,7 @@
 #define SERIAL_BAUD 921600
 // #define SERIAL_BAUD 19200
 // 采样率（单位 Sps）
-#define SAMPLE_RATE 300
+#define SAMPLE_RATE 375
 // #define SAMPLE_RATE 10
 // ADC 测量增益
 #define ADC_PRECISION GAIN_AMP_2X
