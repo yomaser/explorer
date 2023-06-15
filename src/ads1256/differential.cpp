@@ -3,6 +3,7 @@
 #include "ads1256/command.hpp"
 #include "ads1256/register.hpp"
 
+// Differential mode, also apply to single channel
 int32_t ADS1256::getDifferential(uint8_t positiveCh, uint8_t negativeCh) {
     wait();
     SPI.beginTransaction(SPISettings(SPEED, MSBFIRST, SPI_MODE1));

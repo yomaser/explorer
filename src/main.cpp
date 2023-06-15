@@ -2,18 +2,20 @@
 
 #include "ads1256/adc.hpp"
 #include "ads1256/channel.hpp"
+#include "ads1256/gain.hpp"
 #include "ads1256/sample.hpp"
+
 #include "checksum.hpp"
 #include "config.hpp"
 
 ADS1256 adc(SS, PA3, PA2);
 
 void setup() {
-    Serial.begin(SERIAL_BAUD);
     adc.begin();
-
-    adc.setGain(ADC_PRECISION);
-    adc.setSample(SAMPLE_RATE_30000);
+    adc.setBuffer(true);
+    adc.setGain(GAIN_AMP);
+    adc.setSample(SAMPLE_RATE);
+    Serial.begin(SERIAL_BAUD);
 }
 
 void loop() {
@@ -21,17 +23,22 @@ void loop() {
     int32_t adcRawData;
 
     // Get voltage data
-    for (uint16_t i = 0; i < SAMPLE_RATE; i++) {
+    for (uint16_t i = 0; i < PACKET_SIZE; i++) {
+        adcRawData = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
         // Vertical geophone
-        adcRawData = adc.getDifferential(POSITIVE_AIN1, NEGATIVE_AIN2);
+        adcRawData = adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
         sensorData.Vertical[i] = adc.getVoltage(adcRawData);
 
+        adcRawData = adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
+        adcRawData = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
         // East-West geophone
-        adcRawData = adc.getDifferential(POSITIVE_AIN3, NEGATIVE_AIN4);
+        adcRawData = adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
         sensorData.EastWest[i] = adc.getVoltage(adcRawData);
 
+        adcRawData = adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
+        adcRawData = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
         // North-South geophone
-        adcRawData = adc.getDifferential(POSITIVE_AIN5, NEGATIVE_AIN6);
+        adcRawData = adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
         sensorData.NorthSouth[i] = adc.getVoltage(adcRawData);
     }
 
@@ -40,22 +47,23 @@ void loop() {
         switch (i) {
             case 0:
                 sensorData.Checksum[0] =
-                    getChecksum(sensorData.Vertical, SAMPLE_RATE);
+                    getChecksum(sensorData.Vertical, PACKET_SIZE);
                 break;
             case 1:
                 sensorData.Checksum[1] =
-                    getChecksum(sensorData.EastWest, SAMPLE_RATE);
+                    getChecksum(sensorData.EastWest, PACKET_SIZE);
                 break;
             case 2:
                 sensorData.Checksum[2] =
-                    getChecksum(sensorData.NorthSouth, SAMPLE_RATE);
+                    getChecksum(sensorData.NorthSouth, PACKET_SIZE);
                 break;
         }
     }
 
+    // Send sync word
+    Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
+    delayMicroseconds(5);
     // Send structed data
-    Serial.write(FRAME_HEADER, sizeof(FRAME_HEADER));
-    delayMicroseconds(10);
     Serial.write((uint8_t*)&sensorData, sizeof(sensorData));
     Serial.flush();
 }

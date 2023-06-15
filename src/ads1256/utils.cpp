@@ -27,9 +27,3 @@ void ADS1256::begin() {
     // Enable calibration
     writeRegister(REGISTER_STATUS, 0b00000100);
 }
-
-// Stop reading data
-void ADS1256::stop() {
-    // Figure 33 in datasheet
-    SPI.transfer(B00001111);
-}

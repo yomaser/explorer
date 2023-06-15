@@ -1,8 +1,7 @@
 #include "ads1256/adc.hpp"
 #include "ads1256/register.hpp"
 
-#define VREF 2.50
-
+// Get voltage from ADC
 double ADS1256::getVoltage(int32_t value) {
     // if the 24th bit (sign) is not 0, the number is negative
     if (value >> 23) {
