@@ -24,22 +24,25 @@ void loop() {
 
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
-        adcRawData = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
         // Vertical geophone
-        adcRawData = adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
+        adcRawData = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
         sensorData.Vertical[i] = adc.getVoltage(adcRawData);
 
+        adcRawData = adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
         adcRawData = adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
-        adcRawData = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
+
         // East-West geophone
-        adcRawData = adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
+        adcRawData = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
         sensorData.EastWest[i] = adc.getVoltage(adcRawData);
 
+        adcRawData = adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
         adcRawData = adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
-        adcRawData = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
+
         // North-South geophone
-        adcRawData = adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
+        adcRawData = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
         sensorData.NorthSouth[i] = adc.getVoltage(adcRawData);
+
+        adcRawData = adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
     }
 
     // Get checksum
