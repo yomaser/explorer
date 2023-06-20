@@ -3,6 +3,11 @@
 #include <SPI.h>
 #include <stdint.h>
 
+#include "ads1256/channel.hpp"
+#include "ads1256/gain.hpp"
+#include "ads1256/mode.hpp"
+#include "ads1256/sample.hpp"
+
 #define VREF 2.517
 #define SPEED 1920000
 
@@ -16,14 +21,15 @@ class ADS1256 {
 
    public:
     ADS1256(uint8_t cs_pin, uint8_t drdy_pin, uint8_t rst_pin);
-    void setMode(uint8_t mode);
-    void setGain(uint8_t gain);
-    void setSample(uint8_t rate);
     void setBuffer(uint8_t enable);
-    void setChannel(uint8_t channel);
+    void setMode(enum ADC_MODE mode);
+    void setGain(enum GAIN_AMP_RATE gain);
+    void setSample(enum SAMPLE_RATE_SPS rate);
+    void setChannel(enum INPUT_SEL channel);
     int32_t getSingleChannel();
     int32_t getSingleContinuous();
-    int32_t getDifferential(uint8_t positiveCh, uint8_t negativeCh);
+    int32_t getDifferential(enum INPUT_SEL positiveCh,
+                            enum INPUT_SEL negativeCh);
     double getVoltage(int32_t value);
     void begin();
     void reset();

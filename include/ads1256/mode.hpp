@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-enum ADC_MODES {
-    ADC_ONDEMAND = 0,
-    ADC_CONTINUOUS = 1,
+enum ADC_MODE {
+    ADC_MODE_ONESHOT = 0,
+    ADC_MODE_CONTINUOUS = 1,
 };
