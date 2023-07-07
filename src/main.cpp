@@ -5,22 +5,35 @@
 #include "ads1256/gain.hpp"
 #include "ads1256/sample.hpp"
 
+#include "blink.hpp"
 #include "checksum.hpp"
 #include "config.hpp"
 
 ADS1256 adc(SS, PA3, PA2);
 
 void setup() {
+    Serial.begin(SERIAL_BAUD);
+    blinkLED(3, 100);
+
     adc.begin();
     adc.setBuffer(true);
     adc.setGain(GAIN_AMP);
     adc.setSample(SAMPLE_RATE);
-    Serial.begin(SERIAL_BAUD);
+
+    delay(1000);
+    adc.reset();
+    blinkLED(5, 100);
 }
 
 void loop() {
-    SensorData sensorData;
+    if (Serial.available() && Serial.read() == RESET_WORD) {
+        adc.reset();
+        blinkLED(1, 100);
+        Serial.write(ACK_WORD, sizeof(ACK_WORD));
+    }
+
     int32_t adcRawData;
+    SensorData sensorData;
 
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {

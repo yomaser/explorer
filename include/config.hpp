@@ -12,13 +12,21 @@
 #define PACKET_SIZE 10  // maximum 375
 // TTL/485 串口波特率
 #define SERIAL_BAUD 19200  // maximum 921600
+// 设备复位字节
+#define RESET_WORD 0x61
 
 // 数据帧同步字节
 const uint8_t SYNC_WORD[] = {
     0xAA,
     0x55,
 };
-// 检波器数据帧
+// 下位机应答字节
+const uint8_t ACK_WORD[] = {
+    0xAC,
+    0x55,
+};
+
+// 检波器数据帧格式
 struct SensorData {
     double Vertical[PACKET_SIZE];
     double EastWest[PACKET_SIZE];

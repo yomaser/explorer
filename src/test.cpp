@@ -1,24 +1,38 @@
+// #define DIFFERENTIAL 0
+
 // #include <Arduino.h>
+
 // #include "ads1256/adc.hpp"
 // #include "ads1256/channel.hpp"
 // #include "ads1256/gain.hpp"
 // #include "ads1256/sample.hpp"
-// #include "config.hpp"
 
-// #define DIFFERENTIAL 0
+// #include "blink.hpp"
+// #include "config.hpp"
 
 // ADS1256 adc(SS, PA3, PA2);
 
 // void setup() {
 //     Serial.begin(SERIAL_BAUD);
-//     adc.begin();
+//     blinkLED(3, 100);
 
+//     adc.begin();
 //     adc.setBuffer(true);
 //     adc.setGain(GAIN_AMP_1X);
 //     adc.setSample(SAMPLE_RATE_2000);
+
+//     delay(1000);
+//     adc.reset();
+//     blinkLED(5, 100);
 // }
 
 // void loop() {
+//     if (Serial.available() && Serial.read() == RESET_WORD) {
+//         adc.reset();
+//         blinkLED(1, 100);
+//         Serial.write(ACK_WORD, sizeof(ACK_WORD));
+//     }
+
 // #if DIFFERENTIAL
 //     for (uint8_t i = 1; i <= 4; i++) {
 //         int32_t raw;
@@ -84,4 +98,5 @@
 // #endif
 
 //     Serial.println();
+//     Serial.flush();
 // }
