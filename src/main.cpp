@@ -11,17 +11,20 @@
 
 ADS1256 adc(SS, PA3, PA2);
 
+void initADC() {
+    adc.begin();
+    adc.reset();
+
+    adc.setBuffer(false);
+    adc.setGain(GAIN_AMP);
+    adc.setSample(SAMPLE_RATE);
+}
+
 void setup() {
     Serial.begin(SERIAL_BAUD);
     blinkLED(3, 100);
 
-    adc.begin();
-    adc.setBuffer(true);
-    adc.setGain(GAIN_AMP);
-    adc.setSample(SAMPLE_RATE);
-
-    delay(1000);
-    adc.reset();
+    initADC();
     blinkLED(5, 100);
 }
 
@@ -31,8 +34,9 @@ void loop() {
 
     // Support runtime reset
     if (Serial.available() && Serial.read() == RESET_WORD) {
-        adc.reset();
+        initADC();
         blinkLED(1, 100);
+
         Serial.write(ACK_WORD, sizeof(ACK_WORD));
     }
 

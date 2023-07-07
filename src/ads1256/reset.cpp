@@ -1,6 +1,6 @@
 #include "ads1256/adc.hpp"
 
-// Reset ADS1256 module
+// Soft reset ADS1256 module
 void ADS1256::reset() {
     SPI.beginTransaction(SPISettings(SPEED, MSBFIRST, SPI_MODE1));
     // Select chip

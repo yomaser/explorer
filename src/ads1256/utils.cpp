@@ -15,7 +15,7 @@ void ADS1256::begin() {
     pinMode(_cs_pin, OUTPUT);
     pinMode(_drdy_pin, INPUT);
     pinMode(_rst_pin, OUTPUT);
-    // Reset ADS1256
+    // Hard reset ADS1256
     digitalWrite(_rst_pin, LOW);
     delay(250);
     digitalWrite(_rst_pin, HIGH);
