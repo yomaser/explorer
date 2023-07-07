@@ -26,14 +26,15 @@ void setup() {
 }
 
 void loop() {
+    int32_t adcRawData;
+    SensorData sensorData;
+
+    // Support runtime reset
     if (Serial.available() && Serial.read() == RESET_WORD) {
         adc.reset();
         blinkLED(1, 100);
         Serial.write(ACK_WORD, sizeof(ACK_WORD));
     }
-
-    int32_t adcRawData;
-    SensorData sensorData;
 
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
