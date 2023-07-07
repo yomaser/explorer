@@ -15,9 +15,9 @@ void initADC() {
     adc.begin();
     adc.reset();
 
-    adc.setBuffer(false);
     adc.setGain(GAIN_AMP);
     adc.setSample(SAMPLE_RATE);
+    adc.setStatus(DISABLE, DISABLE);
 }
 
 void setup() {

@@ -5,7 +5,7 @@
 #include "ads1256/sample.hpp"
 
 // ADC 增益放大倍率
-#define GAIN_AMP GAIN_AMP_64X  // maximum GAIN_AMP_64X
+#define GAIN_AMP GAIN_AMP_4X  // maximum GAIN_AMP_64X
 // ADC 采样率大小
 #define SAMPLE_RATE SAMPLE_RATE_1000  // maximum SAMPLE_RATE_30000
 // 数据帧内检波器报文长度

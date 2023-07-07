@@ -16,9 +16,9 @@
 //     adc.begin();
 //     adc.reset();
 
-//     adc.setBuffer(false);
 //     adc.setGain(GAIN_AMP_1X);
 //     adc.setSample(SAMPLE_RATE_2000);
+//     adc.setStatus(DISABLE, DISABLE);
 // }
 
 // void setup() {

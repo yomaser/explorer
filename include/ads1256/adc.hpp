@@ -11,6 +11,9 @@
 #define VREF 2.517
 #define SPEED 1920000
 
+#define ENABLE 1
+#define DISABLE 0
+
 class ADS1256 {
    private:
     uint8_t _cs_pin;
@@ -21,7 +24,7 @@ class ADS1256 {
 
    public:
     ADS1256(uint8_t cs_pin, uint8_t drdy_pin, uint8_t rst_pin);
-    void setBuffer(uint8_t enable);
+    void setStatus(uint8_t buffer, uint8_t calibration);
     void setMode(enum ADC_MODE mode);
     void setGain(enum GAIN_AMP_RATE gain);
     void setSample(enum SAMPLE_RATE_SPS rate);
