@@ -9,7 +9,7 @@ double ADS1256::getVoltage(int32_t value) {
         value -= 16777216;
     }
 
-    // 2.5 = Vref; 8388608 = 2^{23} - 1
-    double voltage = ((2 * VREF) / 8388608) * value;
+    // 2.5 = Vref; 8388607 = 2^{23} - 1
+    double voltage = ((2 * VREF) / 8388607) * value;
     return voltage;
 }
