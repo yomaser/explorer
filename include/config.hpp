@@ -4,32 +4,34 @@
 #include "ads1256/gain.hpp"
 #include "ads1256/sample.hpp"
 
-// ADC 增益放大倍率
+// ADC gain amplifier factor
 #define GAIN_AMP GAIN_AMP_4X  // maximum GAIN_AMP_64X
-// ADC 采样率大小
+// ADC sampling rate
 #define SAMPLE_RATE SAMPLE_RATE_1000  // maximum SAMPLE_RATE_30000
-// 数据帧内检波器报文长度
+// Data packet size
 #define PACKET_SIZE 10  // maximum 375
-// TTL/485 串口波特率
+// TTL/485 serial baud
 #define SERIAL_BAUD 19200  // maximum 921600
-// 设备复位字节
+// Reset word
 #define RESET_WORD 0x61
 
-// 数据帧同步字节
+// Syncing bytes
 const uint8_t SYNC_WORD[] = {
-    0xAA,
-    0x55,
+    0xFC,
+    0x1B,
+    0xFA,
 };
-// 下位机应答字节
+// Responding bytes
 const uint8_t ACK_WORD[] = {
-    0xAC,
-    0x55,
+    0xFC,
+    0x2B,
+    0xFA,
 };
 
 // 检波器数据帧格式
 struct SensorData {
-    int32_t EHZ[PACKET_SIZE]; // 垂直
-    int32_t EHE[PACKET_SIZE]; // 东西
-    int32_t EHN[PACKET_SIZE]; // 南北
+    int32_t EHZ[PACKET_SIZE]; // Vertical
+    int32_t EHE[PACKET_SIZE]; // East-West
+    int32_t EHN[PACKET_SIZE]; // North-South
     uint8_t Checksum[3];
 };

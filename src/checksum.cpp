@@ -7,7 +7,7 @@ uint8_t getChecksum(int32_t* array, size_t size) {
         uint8_t* bytes = (uint8_t*)&array[i];
 
         for (size_t j = 0; j < sizeof(int32_t); j++) {
-            checksum += bytes[j];
+            checksum ^= bytes[j];
         }
     }
 

@@ -62,28 +62,15 @@ void loop() {
     }
 
     // Get checksum
-    for (uint8_t i = 0; i < 3; i++) {
-        switch (i) {
-            case 0:
-                sensorData.Checksum[0] =
-                    getChecksum(sensorData.EHZ, PACKET_SIZE);
-                break;
-            case 1:
-                sensorData.Checksum[1] =
-                    getChecksum(sensorData.EHE, PACKET_SIZE);
-                break;
-            case 2:
-                sensorData.Checksum[2] =
-                    getChecksum(sensorData.EHN, PACKET_SIZE);
-                break;
-        }
-    }
+    sensorData.Checksum[0] = getChecksum(sensorData.EHZ, PACKET_SIZE);
+    sensorData.Checksum[1] = getChecksum(sensorData.EHE, PACKET_SIZE);
+    sensorData.Checksum[2] = getChecksum(sensorData.EHN, PACKET_SIZE);
 
-    // Send sync word
+    // Send syncing word
     Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
     delayMicroseconds(5);
 
-    // Send structed data
+    // Send struct data
     Serial.write((uint8_t*)&sensorData, sizeof(sensorData));
     Serial.flush();
 }
