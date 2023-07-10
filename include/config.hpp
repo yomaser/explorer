@@ -5,7 +5,7 @@
 #include "ads1256/sample.hpp"
 
 // ADC 增益放大倍率
-#define GAIN_AMP GAIN_AMP_4X  // maximum GAIN_AMP_64X
+#define GAIN_AMP GAIN_AMP_32X  // maximum GAIN_AMP_64X
 // ADC 采样率大小
 #define SAMPLE_RATE SAMPLE_RATE_1000  // maximum SAMPLE_RATE_30000
 // 数据帧内检波器报文长度
@@ -28,8 +28,8 @@ const uint8_t ACK_WORD[] = {
 
 // 检波器数据帧格式
 struct SensorData {
-    double Vertical[PACKET_SIZE];
-    double EastWest[PACKET_SIZE];
-    double NorthSouth[PACKET_SIZE];
+    int32_t EHZ[PACKET_SIZE]; // 垂直
+    int32_t EHE[PACKET_SIZE]; // 东西
+    int32_t EHN[PACKET_SIZE]; // 南北
     uint8_t Checksum[3];
 };

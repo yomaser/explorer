@@ -11,6 +11,10 @@
 
 ADS1256 adc(SS, PA3, PA2);
 
+uint8_t isReset() {
+    return Serial.available() && Serial.read() == RESET_WORD;
+}
+
 void initADC() {
     adc.begin();
     adc.reset();
@@ -29,38 +33,32 @@ void setup() {
 }
 
 void loop() {
-    int32_t adcRawData;
     SensorData sensorData;
-
-    // Support runtime reset
-    if (Serial.available() && Serial.read() == RESET_WORD) {
-        initADC();
-        blinkLED(1, 100);
-
-        Serial.write(ACK_WORD, sizeof(ACK_WORD));
-    }
 
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
-        // Vertical geophone
-        adcRawData = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
-        sensorData.Vertical[i] = adc.getVoltage(adcRawData);
+        // Support runtime reset
+        if (isReset()) {
+            initADC();
+            blinkLED(1, 100);
 
-        adcRawData = adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
-        adcRawData = adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
+            Serial.write(ACK_WORD, sizeof(ACK_WORD));
+            Serial.flush();
+        }
 
-        // East-West geophone
-        adcRawData = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
-        sensorData.EastWest[i] = adc.getVoltage(adcRawData);
+        // Vertical geophone (EHZ)
+        sensorData.EHZ[i] = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
+        adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
+        adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
 
-        adcRawData = adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
-        adcRawData = adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
+        // East-West geophone (EHE)
+        sensorData.EHE[i] = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
+        adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
+        adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
 
-        // North-South geophone
-        adcRawData = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
-        sensorData.NorthSouth[i] = adc.getVoltage(adcRawData);
-
-        adcRawData = adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
+        // North-South geophone (EHN)
+        sensorData.EHN[i] = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
+        adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
     }
 
     // Get checksum
@@ -68,15 +66,15 @@ void loop() {
         switch (i) {
             case 0:
                 sensorData.Checksum[0] =
-                    getChecksum(sensorData.Vertical, PACKET_SIZE);
+                    getChecksum(sensorData.EHZ, PACKET_SIZE);
                 break;
             case 1:
                 sensorData.Checksum[1] =
-                    getChecksum(sensorData.EastWest, PACKET_SIZE);
+                    getChecksum(sensorData.EHE, PACKET_SIZE);
                 break;
             case 2:
                 sensorData.Checksum[2] =
-                    getChecksum(sensorData.NorthSouth, PACKET_SIZE);
+                    getChecksum(sensorData.EHN, PACKET_SIZE);
                 break;
         }
     }
@@ -84,6 +82,7 @@ void loop() {
     // Send sync word
     Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
     delayMicroseconds(5);
+
     // Send structed data
     Serial.write((uint8_t*)&sensorData, sizeof(sensorData));
     Serial.flush();

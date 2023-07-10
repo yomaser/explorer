@@ -12,6 +12,10 @@
 
 // ADS1256 adc(SS, PA3, PA2);
 
+// uint8_t isReset() {
+//     return Serial.available() && Serial.read() == RESET_WORD;
+// }
+
 // void initADC() {
 //     adc.begin();
 //     adc.reset();
@@ -30,11 +34,12 @@
 // }
 
 // void loop() {
-//     if (Serial.available() && Serial.read() == RESET_WORD) {
+//     if (isReset()) {
 //         initADC();
 //         blinkLED(1, 100);
 
 //         Serial.write(ACK_WORD, sizeof(ACK_WORD));
+//         Serial.flush();
 //     }
 
 // #if DIFFERENTIAL

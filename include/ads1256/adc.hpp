@@ -8,7 +8,7 @@
 #include "ads1256/mode.hpp"
 #include "ads1256/sample.hpp"
 
-#define VREF 2.517
+#define VREF 2.5
 #define SPEED 1920000
 
 #define ENABLE 1
