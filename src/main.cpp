@@ -12,7 +12,7 @@
 ADS1256 adc(SS, PA3, PA2);
 
 int32_t getRawValue(int32_t value) {
-    if (value >> 23 != 0) {
+    if (value >> 23) {
         value -= 16777216;
     }
 
