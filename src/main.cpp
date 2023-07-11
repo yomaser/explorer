@@ -11,6 +11,14 @@
 
 ADS1256 adc(SS, PA3, PA2);
 
+int32_t getRawValue(int32_t value) {
+    if (value >> 23 != 0) {
+        value -= 16777216;
+    }
+
+    return value;
+}
+
 uint8_t isReset() {
     return Serial.available() && Serial.read() == RESET_WORD;
 }
@@ -47,17 +55,20 @@ void loop() {
         }
 
         // Vertical geophone (EHZ)
-        sensorData.EHZ[i] = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
+        sensorData.EHZ[i] =
+            getRawValue(adc.getDifferential(INPUT_AIN1, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
         adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
 
         // East-West geophone (EHE)
-        sensorData.EHE[i] = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
+        sensorData.EHE[i] =
+            getRawValue(adc.getDifferential(INPUT_AIN4, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
         adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
 
         // North-South geophone (EHN)
-        sensorData.EHN[i] = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
+        sensorData.EHN[i] =
+            getRawValue(adc.getDifferential(INPUT_AIN7, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
     }
 

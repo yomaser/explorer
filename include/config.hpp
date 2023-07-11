@@ -7,7 +7,7 @@
 // ADC gain amplifier factor
 #define GAIN_AMP GAIN_AMP_4X  // maximum GAIN_AMP_64X
 // ADC sampling rate
-#define SAMPLE_RATE SAMPLE_RATE_1000  // maximum SAMPLE_RATE_30000
+#define SAMPLE_RATE SAMPLE_RATE_30000  // maximum SAMPLE_RATE_30000
 // Data packet size
 #define PACKET_SIZE 10  // maximum 375
 // TTL/485 serial baud
@@ -19,13 +19,11 @@
 const uint8_t SYNC_WORD[] = {
     0xFC,
     0x1B,
-    0xFA,
 };
 // Responding bytes
 const uint8_t ACK_WORD[] = {
     0xFC,
     0x2B,
-    0xFA,
 };
 
 // 检波器数据帧格式
