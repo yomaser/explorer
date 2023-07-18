@@ -13,6 +13,12 @@
 // ADS1256 adc(SS, PA3, PA2);
 
 // uint8_t isReset() {
+//     uint8_t gain = adc.getGain();
+//     uint8_t sample = adc.getSample();
+//     if (gain != GAIN_AMP || sample != SAMPLE_RATE) {
+//         return 1;
+//     }
+
 //     return Serial.available() && Serial.read() == RESET_WORD;
 // }
 
@@ -20,8 +26,8 @@
 //     adc.begin();
 //     adc.reset();
 
-//     adc.setGain(GAIN_AMP_1X);
-//     adc.setSample(SAMPLE_RATE_2000);
+//     adc.setGain(GAIN_AMP);
+//     adc.setSample(SAMPLE_RATE);
 //     adc.setStatus(DISABLE, DISABLE);
 // }
 

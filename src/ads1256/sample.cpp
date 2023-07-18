@@ -6,3 +6,8 @@
 void ADS1256::setSample(enum SAMPLE_RATE_SPS rate) {
     writeRegister(REGISTER_DRATE, rate);
 }
+
+// Get ADC sample rate
+enum SAMPLE_RATE_SPS ADS1256::getSample() {
+    return (enum SAMPLE_RATE_SPS)(readRegister(REGISTER_DRATE));
+}

@@ -20,6 +20,12 @@ int32_t getRawValue(int32_t value) {
 }
 
 uint8_t isReset() {
+    uint8_t gain = adc.getGain();
+    uint8_t sample = adc.getSample();
+    if (gain != GAIN_AMP || sample != SAMPLE_RATE) {
+        return 1;
+    }
+
     return Serial.available() && Serial.read() == RESET_WORD;
 }
 
