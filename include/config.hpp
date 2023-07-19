@@ -5,7 +5,7 @@
 #include "ads1256/sample.hpp"
 
 // ADC gain amplifier factor
-#define GAIN_AMP GAIN_AMP_1X  // maximum GAIN_AMP_64X
+#define GAIN_AMP GAIN_AMP_2X  // maximum GAIN_AMP_64X
 // ADC sampling rate
 #define SAMPLE_RATE SAMPLE_RATE_30000  // maximum SAMPLE_RATE_30000
 // Data packet size

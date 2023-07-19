@@ -40,10 +40,10 @@ void initADC() {
 
 void setup() {
     Serial.begin(SERIAL_BAUD);
-    blinkLED(3, 100);
+    blinkLED(3, 50);
 
     initADC();
-    blinkLED(5, 100);
+    blinkLED(5, 50);
 }
 
 void loop() {
@@ -54,7 +54,7 @@ void loop() {
         // Support runtime reset
         if (isReset()) {
             initADC();
-            blinkLED(1, 100);
+            blinkLED(1, 50);
 
             Serial.write(ACK_WORD, sizeof(ACK_WORD));
             Serial.flush();
