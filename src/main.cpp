@@ -47,7 +47,7 @@ void setup() {
 }
 
 void loop() {
-    SensorData sensorData;
+    sensor_t sensor;
 
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
@@ -61,33 +61,33 @@ void loop() {
         }
 
         // Vertical geophone (EHZ)
-        sensorData.EHZ[i] =
+        sensor.EHZ[i] =
             getRawValue(adc.getDifferential(INPUT_AIN1, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
         adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
 
         // East-West geophone (EHE)
-        sensorData.EHE[i] =
+        sensor.EHE[i] =
             getRawValue(adc.getDifferential(INPUT_AIN4, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
         adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
 
         // North-South geophone (EHN)
-        sensorData.EHN[i] =
+        sensor.EHN[i] =
             getRawValue(adc.getDifferential(INPUT_AIN7, INPUT_AINCOM));
         adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
     }
 
     // Get checksum
-    sensorData.Checksum[0] = getChecksum(sensorData.EHZ, PACKET_SIZE);
-    sensorData.Checksum[1] = getChecksum(sensorData.EHE, PACKET_SIZE);
-    sensorData.Checksum[2] = getChecksum(sensorData.EHN, PACKET_SIZE);
+    sensor.Checksum[0] = getChecksum(sensor.EHZ, PACKET_SIZE);
+    sensor.Checksum[1] = getChecksum(sensor.EHE, PACKET_SIZE);
+    sensor.Checksum[2] = getChecksum(sensor.EHN, PACKET_SIZE);
 
     // Send syncing word
     Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
     delayMicroseconds(5);
 
     // Send struct data
-    Serial.write((uint8_t*)&sensorData, sizeof(sensorData));
+    Serial.write((uint8_t*)&sensor, sizeof(sensor));
     Serial.flush();
 }

@@ -27,9 +27,9 @@ const uint8_t ACK_WORD[] = {
 };
 
 // Geophone data frame format
-struct SensorData {
-    int32_t EHZ[PACKET_SIZE]; // Vertical
-    int32_t EHE[PACKET_SIZE]; // East-West
-    int32_t EHN[PACKET_SIZE]; // North-South
+typedef struct {
+    int32_t EHZ[PACKET_SIZE];  // Vertical
+    int32_t EHE[PACKET_SIZE];  // East-West
+    int32_t EHN[PACKET_SIZE];  // North-South
     uint8_t Checksum[3];
-};
+} sensor_t;
