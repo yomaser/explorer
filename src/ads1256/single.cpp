@@ -3,8 +3,8 @@
 #include "ads1256/command.hpp"
 #include "ads1256/register.hpp"
 
-// Single channel mode, use with setChannel()
-int32_t ADS1256::getSingleChannel() {
+// One Shot single channel mode, use with setChannel()
+int32_t ADS1256::getSingleOneShot() {
     wait();
     SPI.beginTransaction(SPISettings(1920000, MSBFIRST, SPI_MODE1));
 

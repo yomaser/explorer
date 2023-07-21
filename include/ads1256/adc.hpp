@@ -32,7 +32,7 @@ class ADS1256 {
     enum SAMPLE_RATE_SPS getSample();
     void setChannel(enum INPUT_SEL channel);
     enum INPUT_SEL getChannel();
-    int32_t getSingleChannel();
+    int32_t getSingleOneShot();
     int32_t getSingleContinuous();
     int32_t getDifferential(enum INPUT_SEL positiveCh,
                             enum INPUT_SEL negativeCh);
