@@ -10,7 +10,7 @@
 #define SAMPLE_RATE SAMPLE_RATE_2000  // maximum SAMPLE_RATE_30000
 // Data packet size
 #define PACKET_SIZE 10  // maximum 375
-// TTL/485 serial baud
+// TTL/485 serial baud rate
 #define SERIAL_BAUD 19200  // maximum 921600
 // Reset word
 #define RESET_WORD 0x61
@@ -26,7 +26,7 @@ const uint8_t ACK_WORD[] = {
     0x2B,
 };
 
-// 检波器数据帧格式
+// Geophone data frame format
 struct SensorData {
     int32_t EHZ[PACKET_SIZE]; // Vertical
     int32_t EHE[PACKET_SIZE]; // East-West
