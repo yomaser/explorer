@@ -15,7 +15,7 @@
 // uint8_t isReset() {
 //     uint8_t gain = adc.getGain();
 //     uint8_t sample = adc.getSample();
-//     if (gain != GAIN_AMP || sample != SAMPLE_RATE) {
+//     if (gain != GAIN_RATE || sample != SAMPLE_RATE) {
 //         return 1;
 //     }
 
@@ -26,17 +26,17 @@
 //     adc.begin();
 //     adc.reset();
 
-//     adc.setGain(GAIN_AMP);
+//     adc.setGain(GAIN_RATE);
 //     adc.setSample(SAMPLE_RATE);
 //     adc.setStatus(DISABLE, DISABLE);
 // }
 
 // void setup() {
 //     Serial.begin(SERIAL_BAUD);
-//     blinkLED(3, 100);
+//     blinkLED(3, 50);
 
 //     initADC();
-//     blinkLED(5, 100);
+//     blinkLED(5, 50);
 // }
 
 // void loop() {
@@ -53,16 +53,16 @@
 //         int32_t raw;
 //         switch (i) {
 //             case 1:
-//                 raw = adc.getDifferential(INPUT_AIN1, INPUT_AIN2);
+//                 raw = adc.getDifferential(ANALOG_INPUT_AIN1, ANALOG_INPUT_AIN2);
 //                 break;
 //             case 2:
-//                 raw = adc.getDifferential(INPUT_AIN3, INPUT_AIN4);
+//                 raw = adc.getDifferential(ANALOG_INPUT_AIN3, ANALOG_INPUT_AIN4);
 //                 break;
 //             case 3:
-//                 raw = adc.getDifferential(INPUT_AIN5, INPUT_AIN6);
+//                 raw = adc.getDifferential(ANALOG_INPUT_AIN5, ANALOG_INPUT_AIN6);
 //                 break;
 //             case 4:
-//                 raw = adc.getDifferential(INPUT_AIN7, INPUT_AIN8);
+//                 raw = adc.getDifferential(ANALOG_INPUT_AIN7, ANALOG_INPUT_AIN8);
 //                 break;
 //         }
 
@@ -78,28 +78,36 @@
 //         int32_t raw;
 //         switch (i) {
 //             case 1:
-//                 raw = adc.getDifferential(INPUT_AIN1, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN1, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 2:
-//                 raw = adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN2, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 3:
-//                 raw = adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN3, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 4:
-//                 raw = adc.getDifferential(INPUT_AIN4, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN4, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 5:
-//                 raw = adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN5, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 6:
-//                 raw = adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN6, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 7:
-//                 raw = adc.getDifferential(INPUT_AIN7, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN7, ANALOG_INPUT_AINCOM);
 //                 break;
 //             case 8:
-//                 raw = adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
+//                 raw =
+//                     adc.getDifferential(ANALOG_INPUT_AIN8, ANALOG_INPUT_AINCOM);
 //                 break;
 //         }
 
