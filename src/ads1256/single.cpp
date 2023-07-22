@@ -11,15 +11,13 @@ int32_t ADS1256::getSingleOneShot() {
     // CS must stay LOW during the entire
     digitalWrite(_cs_pin, LOW);
     // Issue RDATA command
-    SPI.transfer(COMMAND_RDATA);
+    SPI.transfer(DEVICE_COMMAND_RDATA);
     delayMicroseconds(10);
 
     // Get the 24-bit result
-    int32_t result = SPI.transfer(0x0F);
-    result <<= 8;                  // MSB gets shifted LEFT by 8 bits
-    result |= SPI.transfer(0x0F);  // MSB | Mid-byte
-    result <<= 8;                  // MSB | Mid-byte gets shifted LEFT by 8 bits
-    result |= SPI.transfer(0x0F);  //(MSB | Mid-byte) | LSB - final result
+    int32_t result = (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC) << 16 |
+                     (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC) << 8 |
+                     (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC);
 
     // Deselect the chip
     digitalWrite(_cs_pin, HIGH);
@@ -37,11 +35,9 @@ int32_t ADS1256::getSingleContinuous() {
     digitalWrite(_cs_pin, LOW);
 
     // Get the 24-bit result
-    int32_t result = SPI.transfer(0x0F);
-    result <<= 8;                  // MSB gets shifted LEFT by 8 bits
-    result |= SPI.transfer(0x0F);  // MSB | Mid-byte
-    result <<= 8;                  // MSB | Mid-byte gets shifted LEFT by 8 bits
-    result |= SPI.transfer(0x0F);  //(MSB | Mid-byte) | LSB - final result
+    int32_t result = (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC) << 16 |
+                     (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC) << 8 |
+                     (int32_t)SPI.transfer(DEVICE_COMMAND_SDATAC);
 
     // Deselect the chip
     digitalWrite(_cs_pin, HIGH);

@@ -24,20 +24,20 @@ class ADS1256 {
 
    public:
     ADS1256(uint8_t cs_pin, uint8_t drdy_pin, uint8_t rst_pin);
-    void setMode(enum ADC_MODE mode);
+    void setMode(AdcMode mode);
     void setStatus(uint8_t buffer, uint8_t calibration);
-    void setGain(enum GAIN_AMP_RATE gain);
-    enum GAIN_AMP_RATE getGain();
-    void setSample(enum SAMPLE_RATE_SPS rate);
-    enum SAMPLE_RATE_SPS getSample();
-    void setChannel(enum INPUT_SEL channel);
-    enum INPUT_SEL getChannel();
-    int32_t getSingleOneShot();
-    int32_t getSingleContinuous();
-    int32_t getDifferential(enum INPUT_SEL positiveCh,
-                            enum INPUT_SEL negativeCh);
+    void setGain(GainRate gain);
+    GainRate getGain(void);
+    void setSample(SampleRateSPS rate);
+    SampleRateSPS getSample(void);
+    void setChannel(AnalogInputChannel channel);
+    AnalogInputChannel getChannel(void);
+    int32_t getSingleOneShot(void);
+    int32_t getSingleContinuous(void);
+    int32_t getDifferential(AnalogInputChannel positiveCh,
+                            AnalogInputChannel negativeCh);
     double getVoltage(int32_t value);
-    void begin();
-    void reset();
-    void wait();
+    void begin(void);
+    void reset(void);
+    void wait(void);
 };

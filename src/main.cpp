@@ -61,21 +61,21 @@ void loop() {
         }
 
         // Vertical geophone (EHZ)
-        sensor.EHZ[i] =
-            getRawValue(adc.getDifferential(INPUT_AIN1, INPUT_AINCOM));
-        adc.getDifferential(INPUT_AIN2, INPUT_AINCOM);
-        adc.getDifferential(INPUT_AIN3, INPUT_AINCOM);
+        sensor.EHZ[i] = getRawValue(
+            adc.getDifferential(ANALOG_INPUT_AIN1, ANALOG_INPUT_AINCOM));
+        adc.getDifferential(ANALOG_INPUT_AIN2, ANALOG_INPUT_AINCOM);
+        adc.getDifferential(ANALOG_INPUT_AIN3, ANALOG_INPUT_AINCOM);
 
         // East-West geophone (EHE)
-        sensor.EHE[i] =
-            getRawValue(adc.getDifferential(INPUT_AIN4, INPUT_AINCOM));
-        adc.getDifferential(INPUT_AIN5, INPUT_AINCOM);
-        adc.getDifferential(INPUT_AIN6, INPUT_AINCOM);
+        sensor.EHE[i] = getRawValue(
+            adc.getDifferential(ANALOG_INPUT_AIN4, ANALOG_INPUT_AINCOM));
+        adc.getDifferential(ANALOG_INPUT_AIN5, ANALOG_INPUT_AINCOM);
+        adc.getDifferential(ANALOG_INPUT_AIN6, ANALOG_INPUT_AINCOM);
 
         // North-South geophone (EHN)
-        sensor.EHN[i] =
-            getRawValue(adc.getDifferential(INPUT_AIN7, INPUT_AINCOM));
-        adc.getDifferential(INPUT_AIN8, INPUT_AINCOM);
+        sensor.EHN[i] = getRawValue(
+            adc.getDifferential(ANALOG_INPUT_AIN7, ANALOG_INPUT_AINCOM));
+        adc.getDifferential(ANALOG_INPUT_AIN8, ANALOG_INPUT_AINCOM);
     }
 
     // Get checksum

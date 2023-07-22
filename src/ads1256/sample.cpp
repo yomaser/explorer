@@ -3,11 +3,11 @@
 #include "ads1256/register.hpp"
 
 // Set ADC sample rate
-void ADS1256::setSample(enum SAMPLE_RATE_SPS rate) {
-    writeRegister(REGISTER_DRATE, rate);
+void ADS1256::setSample(SampleRateSPS rate) {
+    writeRegister(ADC_REGISTER_DRATE, rate);
 }
 
 // Get ADC sample rate
-enum SAMPLE_RATE_SPS ADS1256::getSample() {
-    return (enum SAMPLE_RATE_SPS)(readRegister(REGISTER_DRATE));
+SampleRateSPS ADS1256::getSample() {
+    return (SampleRateSPS)readRegister(ADC_REGISTER_DRATE);
 }
