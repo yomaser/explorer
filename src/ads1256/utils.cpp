@@ -5,7 +5,7 @@
 void ADS1256::wait() {
     // Stuck unless DRDY is low
     while (digitalRead(_drdy_pin)) {
-        delayMicroseconds(5);
+        ;
     }
 }
 
@@ -22,8 +22,6 @@ void ADS1256::begin() {
     delay(250);
     // Initialize SPI
     SPI.begin();
-    // Select chip
-    digitalWrite(_cs_pin, LOW);
     // Enable calibration
     writeRegister(ADC_REGISTER_STATUS, 0x04);
 }

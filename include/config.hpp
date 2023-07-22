@@ -4,14 +4,14 @@
 #include "ads1256/gain.hpp"
 #include "ads1256/sample.hpp"
 
-// ADC gain rate
-#define GAIN_RATE GAIN_RATE_1X  // maximum GAIN_AMP_64X
-// ADC sampling rate
-#define SAMPLE_RATE SAMPLE_RATE_2000_SPS  // maximum SAMPLE_RATE_30000
-// Data packet size
-#define PACKET_SIZE 10  // maximum 375
-// TTL/485 serial baud rate
-#define SERIAL_BAUD 19200  // maximum 921600
+// ADC sampling rate (maximum SAMPLE_RATE_30000_SPS)
+#define SAMPLE_RATE SAMPLE_RATE_2000_SPS
+// ADC gain rate (maximum GAIN_RATE_64X)
+#define GAIN_RATE GAIN_RATE_1X
+// serial baud rate (maximum 921600)
+#define SERIAL_BAUD 19200
+// Data packet size (maximum 375)
+#define PACKET_SIZE 10
 // Reset word
 #define RESET_WORD 0x61
 
