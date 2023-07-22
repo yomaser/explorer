@@ -4,10 +4,10 @@
 
 // Set ADC gain
 void ADS1256::setGain(GainRate gain) {
-    writeRegister(ADC_REGISTER_ADCON, gain & 0b111);
+    writeRegister(ADC_REGISTER_ADCON, gain & 0x07);
 }
 
 // Get ADC gain
 GainRate ADS1256::getGain() {
-    return (GainRate)(readRegister(ADC_REGISTER_ADCON) & 0b111);
+    return (GainRate)(readRegister(ADC_REGISTER_ADCON) & 0x07);
 }

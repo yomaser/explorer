@@ -25,5 +25,5 @@ void ADS1256::begin() {
     // Select chip
     digitalWrite(_cs_pin, LOW);
     // Enable calibration
-    writeRegister(ADC_REGISTER_STATUS, 0b00000100);
+    writeRegister(ADC_REGISTER_STATUS, 0x04);
 }

@@ -4,5 +4,5 @@
 
 typedef enum {
     ADC_MODE_ONESHOT = 0,
-    ADC_MODE_CONTINUOUS = 1,
+    ADC_MODE_CONTINUOUS,
 } AdcMode;
