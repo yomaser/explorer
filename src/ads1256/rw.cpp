@@ -2,6 +2,14 @@
 #include "ads1256/command.hpp"
 #include "ads1256/register.hpp"
 
+// Wait for DRDY to go low, then read register
+void ADS1256::wait() {
+    // Stuck unless DRDY is low
+    while (digitalRead(_drdy_pin)) {
+        ;
+    }
+}
+
 uint8_t ADS1256::readRegister(uint8_t reg) {
     wait();
     SPI.beginTransaction(SPISettings(SPEED, MSBFIRST, SPI_MODE1));
