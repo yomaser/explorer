@@ -22,7 +22,7 @@ int32_t getRawValue(int32_t value) {
 uint8_t isReset() {
     uint8_t gain = adc.getGain();
     uint8_t sample = adc.getSample();
-    if (gain != GAIN_AMP || sample != SAMPLE_RATE) {
+    if (gain != GAIN_RATE || sample != SAMPLE_RATE) {
         return 1;
     }
 
@@ -33,7 +33,7 @@ void initADC() {
     adc.begin();
     adc.reset();
 
-    adc.setGain(GAIN_AMP);
+    adc.setGain(GAIN_RATE);
     adc.setSample(SAMPLE_RATE);
     adc.setStatus(ENABLE, DISABLE);
 }
