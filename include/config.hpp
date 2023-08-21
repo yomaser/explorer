@@ -7,7 +7,7 @@
 // ADC sampling rate (maximum SAMPLE_RATE_30000_SPS)
 #define SAMPLE_RATE SAMPLE_RATE_2000_SPS
 // ADC gain rate (maximum GAIN_RATE_64X)
-#define GAIN_RATE GAIN_RATE_1X
+#define GAIN_RATE GAIN_RATE_4X
 // serial baud rate (maximum 921600)
 #define SERIAL_BAUD 19200
 // Data packet size (maximum 375)
