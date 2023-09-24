@@ -53,11 +53,11 @@ void loop() {
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
         // Support runtime reset
         if (isReset()) {
-            initADC();
-            blinkLED(1, 50);
-
             Serial.write(ACK_WORD, sizeof(ACK_WORD));
             Serial.flush();
+
+            initADC();
+            blinkLED(1, 50);
         }
 
         // Vertical geophone (EHZ)
@@ -79,8 +79,6 @@ void loop() {
 
     // Send syncing word
     Serial.write(SYNC_WORD, sizeof(SYNC_WORD));
-    delayMicroseconds(5);
-
     // Send struct data
     Serial.write((uint8_t*)&sensor, sizeof(sensor));
     Serial.flush();

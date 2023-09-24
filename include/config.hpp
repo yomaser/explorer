@@ -11,7 +11,7 @@
 // serial baud rate (maximum 921600)
 #define SERIAL_BAUD 19200
 // Data packet size (maximum 375)
-#define PACKET_SIZE 10
+#define PACKET_SIZE 2
 // Reset word
 #define RESET_WORD 0x61
 
