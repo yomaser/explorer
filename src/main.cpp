@@ -19,10 +19,16 @@ int32_t getRawValue(int32_t value) {
     return value;
 }
 
-uint8_t isReset() {
+uint8_t shouldReset() {
     uint8_t gain = adc.getGain();
     uint8_t sample = adc.getSample();
     if (gain != GAIN_RATE || sample != SAMPLE_RATE) {
+        return 1;
+    }
+
+    uint8_t buffer, calibration;
+    adc.getStatus(&buffer, &calibration);
+    if (buffer != ADC_BUFFER || calibration != ADC_CALIBRATION) {
         return 1;
     }
 
@@ -35,7 +41,7 @@ void initADC() {
 
     adc.setGain(GAIN_RATE);
     adc.setSample(SAMPLE_RATE);
-    adc.setStatus(ENABLE, ENABLE);
+    adc.setStatus(ADC_BUFFER, ADC_CALIBRATION);
 }
 
 void setup() {
@@ -52,7 +58,7 @@ void loop() {
     // Get voltage data
     for (uint16_t i = 0; i < PACKET_SIZE; i++) {
         // Support runtime reset
-        if (isReset()) {
+        if (shouldReset()) {
             Serial.write(ACK_WORD, sizeof(ACK_WORD));
             Serial.flush();
 

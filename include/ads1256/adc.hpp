@@ -26,6 +26,7 @@ class ADS1256 {
     ADS1256(uint8_t cs_pin, uint8_t drdy_pin, uint8_t rst_pin);
     void setMode(AdcMode mode);
     void setStatus(uint8_t buffer, uint8_t calibration);
+    void getStatus(uint8_t *buffer, uint8_t *calibration);
     void setGain(GainRate gain);
     GainRate getGain(void);
     void setSample(SampleRateSPS rate);
