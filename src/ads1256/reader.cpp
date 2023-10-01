@@ -6,7 +6,7 @@
 // One Shot single channel mode, use with setChannel()
 int32_t ADS1256::getSingleOneShot() {
     wait();
-    SPI.beginTransaction(SPISettings(1920000, MSBFIRST, SPI_MODE1));
+    SPI.beginTransaction(SPISettings(SPEED, MSBFIRST, SPI_MODE1));
 
     // CS must stay LOW during the entire
     digitalWrite(_cs_pin, LOW);
@@ -29,7 +29,7 @@ int32_t ADS1256::getSingleOneShot() {
 // Continuous resding mode (i.e. AIN0+COM)
 int32_t ADS1256::getSingleContinuous() {
     wait();
-    SPI.beginTransaction(SPISettings(1920000, MSBFIRST, SPI_MODE1));
+    SPI.beginTransaction(SPISettings(SPEED, MSBFIRST, SPI_MODE1));
 
     // CS must stay LOW during the entire
     digitalWrite(_cs_pin, LOW);
